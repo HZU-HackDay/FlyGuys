@@ -14,7 +14,7 @@ This is Unique Hackday project called FlyGuys powered by Team 8.
 ```
 
 ## 时间安排
-第一天：
+第一天： <br>
 13：00 确定方案 <br>
 15：00 ~ 17：00 熟悉每个模块，确定当前进度 <br>
 17：00 ~ 18：00 每个模块基本确定 <br>
@@ -22,8 +22,12 @@ This is Unique Hackday project called FlyGuys powered by Team 8.
 20：00 ~ 22：00 基本组装完成 <br>
 22：00 ~ 24：00 基本demo完成 <br>
 
-第二天：
-08：00~ 09：00 测试demo
+第二天： <br>
+00：00 ~ 04：00 模块对接 <br>
+06：00 ~ 08：00 封装产品界面 <br>
+08：00 ~ 09：00 测试demo、编写说明书 <br>
+09：00 ~ 10：00 路演演讲稿 <br>
+10：00 ~ 11：00 路演测试（演讲+测试游戏）<br>
 
 
 ## 模块安排
