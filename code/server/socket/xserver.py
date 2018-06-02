@@ -72,6 +72,8 @@ def bluetooth(server):
 					msg["data"] = "left"
 				elif recv_msg == "R":
 					msg["data"] = "right"
+				elif recv_msg == "X":
+					msg["data"] = "null"
 
 				try:
 					print("=> send message to all clients {:s}".format(recv_msg))
@@ -80,14 +82,13 @@ def bluetooth(server):
 					print "ERROR!"
 				print msg
 			else:
-				print "=> Received null"
-				#exit()
+				pass
 		except:
 			pass
 		print("\n")
 
 def main():
-	PORT=9001
+	PORT = 9001
 	server = WebsocketServer(PORT, "0.0.0.0")
 	server.set_fn_new_client(new_client)
 	server.set_fn_client_left(client_left)
