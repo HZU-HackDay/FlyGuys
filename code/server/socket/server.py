@@ -9,36 +9,52 @@
 '''
 Socket服务端，用于FlyGuys数据传输
 '''
-import json
+import json, threading, time
 from websocket_server import WebsocketServer
 
-# Called for every client connecting (after handshake)
+msg = {"status": 1, "data": "", "type": "server"}
+
 def new_client(client, server):
-	print("=> New client connected and was given id %d" % client['id'])
-	server.send_message_to_all("Hey all, a new client has joined us")
+	msg["data"] = "=> New client, id={:d}".format(client['id'])
+	server.send_message_to_all(json.dumps(msg))
+	print(msg)
 
 def client_left(client, server):
-	print("=> Client(%d) disconnected" % client['id'])
+	msg["data"] = "=> Client({:d}) disconnected".format(client['id'])
+	server.send_message_to_all(json.dumps(msg))
+	print(msg)
 
 def message_received(client, server, message):
-	data = {"status": 1, "data": message, "type": "server"}
-
 	try:
 		recv_msg = json.loads(message)
 		if recv_msg["type"] == "arduino":
-			data["data"] = recv_msg["data"]
-			server.send_message_to_all(json.dumps(data))
+			msg["data"] = recv_msg["data"]
+			server.send_message_to_all(json.dumps(msg))
 		elif recv_msg["type"] == "web":
-			data["data"] = "=> recv_msg from web: " + recv_msg["data"]
-			server.send_message(client, json.dumps(data))
+			msg["data"] = "=> recv_msg from web: " + recv_msg["data"]
+			server.send_message(client, json.dumps(msg))
 	except:
 		server.send_message(client, message)
 	print("=> Client(%d) said: %s" % (client['id'], message))
 
+def send_heatbeat(server):
+	data = ["left", "right"]
+	msg = {"status": 1, "data": data[0], "type": "server"}
+	print("=> start send_heatbeat threading...")
+
+	count = 0
+	while True:
+		msg["data"] = data[count % 2]
+		server.send_message_to_all(json.dumps(msg))
+		count += 1
+		time.sleep(2)
 
 PORT=9001
 server = WebsocketServer(PORT, "0.0.0.0")
 server.set_fn_new_client(new_client)
 server.set_fn_client_left(client_left)
 server.set_fn_message_received(message_received)
+
+t = threading.Thread(target=send_heatbeat, args=(server, ), name='LoopThread')
+t.start()
 server.run_forever()
