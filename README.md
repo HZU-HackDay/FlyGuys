@@ -62,6 +62,12 @@ X = null
 ---
 ## 产品效果
 
+图片展示：<br>
+![](./images/project.jpg) <br>
+
+录像展示：<br>
+<video src="./images/view.mp4" controls="controls"></video><br>
+
 ---
 ## 团队照片
 ![Team](./images/team.jpg)
