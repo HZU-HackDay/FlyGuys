@@ -14,7 +14,7 @@ from websocket_server import WebsocketServer
 
 msg = {"status": 1, "data": "", "type": "server"}
 bluetooth_port = "/dev/tty.LIU_01-DevB"
-music_list = ["bg", "chendu", "hdl", "xiaohuniang", "frisbee", "morning_energy", "rolling_in_the_deep", "one_summers_day"]
+music_list = ["maliao", "morning_energy", "hdl", "bg"]
 
 def new_client(client, server):
 	msg["data"] = "=> New client, id={:d}".format(client['id'])

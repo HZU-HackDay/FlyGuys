@@ -3,7 +3,7 @@
  *
  * Loads multiple recources, get progress, callback friendly.
  * Supports textures, texturesCube, geometries, analysers, images.
- * 
+ *
  * @author Thibaut 'BKcore' Despoulain <http://bkcore.com>
  */
 
@@ -57,7 +57,7 @@ bkcore.threejs.Loader = function(opts)
 
 /**
  * Load the given list of resources
- * @param  {textures, texturesCube, geometries, analysers, images} data 
+ * @param  {textures, texturesCube, geometries, analysers, images} data
  */
 bkcore.threejs.Loader.prototype.load = function(data)
 {
@@ -123,7 +123,7 @@ bkcore.threejs.Loader.prototype.updateState = function(type, name, state)
 /**
  * Get loaded resource
  * @param  string type [textures, texturesCube, geometries, analysers, images]
- * @param  string name 
+ * @param  string name
  * @return Mixed
  */
 bkcore.threejs.Loader.prototype.get = function(type, name)
@@ -163,13 +163,13 @@ bkcore.threejs.Loader.prototype.loadTexture = function(name, url)
 	var self = this;
 	this.updateState("textures", name, false);
 	this.data.textures[name] = THREE.ImageUtils.loadTexture(
-		url, 
-		bkcore.NONE, 
-		function(){ 
-			self.updateState("textures", name, true); 
-		}, 
-		function(){ 
-			self.errorCallback.call(self, name); 
+		url,
+		bkcore.NONE,
+		function(){
+			self.updateState("textures", name, true);
+		},
+		function(){
+			self.errorCallback.call(self, name);
 		}
 	);
 }
@@ -185,12 +185,12 @@ bkcore.threejs.Loader.prototype.loadTextureCube = function(name, url)
 	];
 
 	this.updateState("texturesCube", name, false);
-	this.data.texturesCube[name] = THREE.ImageUtils.loadTextureCube( 
-		urls, 
-		new THREE.CubeRefractionMapping(), 
-		function(){ 
-			self.updateState("texturesCube", name, true); 
-		} 
+	this.data.texturesCube[name] = THREE.ImageUtils.loadTextureCube(
+		urls,
+		new THREE.CubeRefractionMapping(),
+		function(){
+			self.updateState("texturesCube", name, true);
+		}
 	);
 }
 
@@ -200,10 +200,10 @@ bkcore.threejs.Loader.prototype.loadGeometry = function(name, url)
 	this.data.geometries[name] = null;
 	this.updateState("geometries", name, false);
 	this.jsonLoader.load(
-		url, 
-		function(a){ 
+		url,
+		function(a){
 			self.data.geometries[name] = a;
-			self.updateState("geometries", name, true); 
+			self.updateState("geometries", name, true);
 		}
 	);
 }
@@ -213,8 +213,8 @@ bkcore.threejs.Loader.prototype.loadAnalyser = function(name, url)
 	var self = this;
 	this.updateState("analysers", name, false);
 	this.data.analysers[name] = new bkcore.ImageData(
-		url, 
-		function(){ 
+		url,
+		function(){
 			self.updateState("analysers", name, true);
 		}
 	);
@@ -225,7 +225,7 @@ bkcore.threejs.Loader.prototype.loadImage = function(name, url)
 	var self = this;
 	this.updateState("images", name, false);
 	var e = new Image();
-	e.onload = function() { 
+	e.onload = function() {
 		self.updateState("images", name, true) ;
 	};
 	e.crossOrigin = "anonymous";
@@ -234,18 +234,20 @@ bkcore.threejs.Loader.prototype.loadImage = function(name, url)
 }
 
 bkcore.threejs.Loader.prototype.loadSound = function(src, name, loop){
+		// alert(src);
     var self = this;
     this.updateState("sounds", name, false);
-    
+
     bkcore.Audio.addSound(
     	src,
-    	name, 
-    	loop, 
+    	name,
+    	loop,
     	function(){
        	 self.updateState("sounds", name, true);
     	}
     );
-    
+
+
     this.data.sounds[name] = {
         play: function(){
             bkcore.Audio.play(name);

@@ -103,7 +103,7 @@
     getWebGL = $('start');
     getWebGL.innerHTML = 'WebGL is not supported!';
     getWebGL.onclick = function() {
-      return window.location.href = 'http://localhost:8000/';
+      return window.location.href = 'http://get.webgl.org/';
     };
   } else {
     $('start').onclick = function() {
@@ -112,4 +112,5 @@
       return $('step-2').style.backgroundImage = "url(css/help-" + s[0][3] + ".png)";
     };
   }
+
 }).call(this);

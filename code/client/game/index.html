@@ -29,8 +29,38 @@
         width: 100%;
       }
     </style>
+    <script type="text/javascript">
+    //analytics
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26274524-4']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
   </head>
 <script type="text/javascript", language=JavaScript charset="UTF-8">
+// 　　document.onkeydown=function(event){
+// 　　　　if(event.keyCode == 38){
+// 　　　　　　alert('你按下了Enter');
+// 　　　　}
+//       else if (event.keyCode == 39) {
+//         alert('你按下了39');
+//         bkcore.Audio.stop('bg');
+//         bkcore.Audio.play('chendu');
+//
+//         bkcore.Audio.stop('wind');
+//       }
+//       else if (event.keyCode == 37) {
+//         alert('你按下了37');
+//         bkcore.Audio.stop('chendu');
+//         bkcore.Audio.play('hdl');
+//
+//         bkcore.Audio.stop('wind');
+//       }
+　　};
 </script>
   <body onload="init();">
     <div id="step-1">
@@ -123,10 +153,12 @@
       evtObjup = document.createEvent('KeyEvents');
       evtObjup.initKeyEvent("keyup", true, true, null, 0, 0, 0, 0,38,38);
 
+
       evtObjleft = document.createEvent('KeyEvents');
       evtObjleft.initKeyEvent("keydown", true, true, null, 0, 0, 0, 0,37,37);
       evtObjleftup = document.createEvent('KeyEvents');
       evtObjleftup.initKeyEvent("keyup", true, true, null, 0, 0, 0, 0,37,37);
+
 
       evtObjright = document.createEvent('KeyEvents');
       evtObjright.initKeyEvent("keydown", true, true, null, 0, 0, 0, 0,39,39);
@@ -138,6 +170,10 @@
       evtObjssup = document.createEvent('KeyEvents');
       evtObjssup.initKeyEvent("keyup", true, true, null, 0, 0, 0, 0,40,40);
 
+
+
+
+      var dangqian = 'bg'
       function init() {
         // Connect to Web Socket
         ws = new WebSocket("ws://192.168.0.112:9001/");
@@ -149,31 +185,58 @@
         ws.onmessage = function(e) {
           // e.data contains received string.
           da = JSON.parse(e.data);
-          if (da['data']=='left'){
-            document.dispatchEvent(evtObjrightup);
-            document.dispatchEvent(evtObjleft);
-            console.log(da['data'])
-          }
-          if (da['data']=='right'){
-            document.dispatchEvent(evtObjleftup);
-            document.dispatchEvent(evtObjright);
-            console.log(da['data'])
-          }
-          if (da['data']=='down'){
-            document.dispatchEvent(evtObjleftup);
-            document.dispatchEvent(evtObjrightup);
-            document.dispatchEvent(evtObjssup);
-            document.dispatchEvent(evtObjdown);
-            console.log(da['data'])
-          }
+          if (da['type']=='server'){
+            if (da['data']=='left'){
+              document.dispatchEvent(evtObjrightup);
+              document.dispatchEvent(evtObjleft);
+              document.dispatchEvent(evtObjssup);
+              document.dispatchEvent(evtObjssup);
+              // console.log(da['data'])
+            }
+            if (da['data']=='right'){
+              document.dispatchEvent(evtObjleftup);
+              document.dispatchEvent(evtObjright);
+              document.dispatchEvent(evtObjup);
+              document.dispatchEvent(evtObjup);
+              // console.log(da['data'])
 
-          if (da['data']=='up'){
-            document.dispatchEvent(evtObjleftup);
-            document.dispatchEvent(evtObjrightup);
-            document.dispatchEvent(evtObjup);
-            document.dispatchEvent(evtObjss);
-            // document.dispatchEvent(evtObjssup);
-            console.log(da['data'])
+            }
+            if (da['data']=='up'){
+
+
+              document.dispatchEvent(evtObjleftup);
+              document.dispatchEvent(evtObjrightup);
+              document.dispatchEvent(evtObjssup);
+              document.dispatchEvent(evtObjdown);
+              // document.dispatchEvent(evtObjup);
+              // console.log(da['data'])
+            }
+
+            if (da['data']=='down'){
+              document.dispatchEvent(evtObjleftup);
+              document.dispatchEvent(evtObjrightup);
+              document.dispatchEvent(evtObjup);
+              document.dispatchEvent(evtObjss);
+              // document.dispatchEvent(evtObjssup);
+              // console.log(da['data'])
+            }
+
+            if (da['data']=='null'){
+              document.dispatchEvent(evtObjleftup);
+              document.dispatchEvent(evtObjrightup);
+              document.dispatchEvent(evtObjup);
+              document.dispatchEvent(evtObjssup);
+              // document.dispatchEvent(evtObjssup);
+              // console.log(da['data'])
+            }
+          }
+          else if (true) {
+            // alert(dangqian)
+            bkcore.Audio.stop(dangqian);
+            bkcore.Audio.play(da['data']);
+            dangqian = da['data']
+          	bkcore.Audio.stop('wind');
+
           }
 
           // if (da['data']=='down'){
@@ -197,6 +260,7 @@
 
       function onSubmit() {
         var input = document.getElementById("input");
+        // You can send message to the Web Socket using ws.send.
         ws.send(input.value);
         output("send: " + input.value);
         input.value = "";
@@ -208,8 +272,17 @@
       }
 
       function output(str) {
+        // var log = document.getElementById("log");
+        // var escaped = str.replace(/&/, "&amp;").replace(/</, "&lt;").
+        //   replace(/>/, "&gt;").replace(/"/, "&quot;"); // "
+        // log.innerHTML = escaped + "<br>" + log.innerHTML;
         console.log(str)
       }
+
+
+
     </script>
+
+
   </body>
 </html>

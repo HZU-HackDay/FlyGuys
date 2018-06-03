@@ -90,6 +90,21 @@ bkcore.hexgl.tracks.Cityscape = {
 						loop: true,
 						usePanner: false
 					},
+					hdl: {
+						src: 'audio/hdl.mp3',
+						loop: true,
+						usePanner: false
+					},
+					morning_energy: {
+						src: 'audio/morning_energy.mp3',
+						loop: true,
+						usePanner: false
+					},
+					maliao: {
+						src: 'audio/maliao.mp3',
+						loop: true,
+						usePanner: false
+					},
 					crash: {
 						src: 'audio/crash.ogg',
 						loop: false,
@@ -171,6 +186,18 @@ bkcore.hexgl.tracks.Cityscape = {
 				sounds: {
 					bg: {
 						src: 'audio/bg.ogg',
+						loop: true
+					},
+					hdl: {
+						src: 'audio/hdl.mp3',
+						loop: true
+					},
+					morning_energy: {
+						src: 'audio/morning_energy.mp3',
+						loop: true
+					},
+					maliao: {
+						src: 'audio/maliao.mp3',
 						loop: true
 					},
 					crash: {
@@ -410,7 +437,7 @@ bkcore.hexgl.tracks.Cityscape = {
 
 		var boosterLight = new THREE.PointLight(0x00a2ff, 4.0, 60);
 		boosterLight.position.set(0, 0.665, -4);
-		
+
 		// desktop + quality low, mid or high
 		// OR
 		// mobile + quality mid or high
@@ -443,7 +470,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			boosterLight: boosterLight,
 			useParticles: false
 		};
-		
+
 		// desktop + quality mid or high
 		if(quality > 2)
 		{

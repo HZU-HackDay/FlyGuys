@@ -249,8 +249,7 @@ bkcore.hexgl.ShipControls = function(ctx)
 	}
 
 	function onKeyDown(event)
-	{	
-		console.log("controll", event);
+	{
 		switch(event.keyCode)
 		{
 			case 38: /*up*/	self.key.forward = true; break;
@@ -289,8 +288,8 @@ bkcore.hexgl.ShipControls = function(ctx)
 		}
 	};
 
-	domElement.addEventListener('keydown', onKeyDown, true);
-	domElement.addEventListener('keyup', onKeyUp, true);
+	domElement.addEventListener('keydown', onKeyDown, false);
+	domElement.addEventListener('keyup', onKeyUp, false);
 };
 
 bkcore.hexgl.ShipControls.prototype.control = function(threeMesh)
