@@ -9,11 +9,12 @@
 '''
 Socket服务端，用于FlyGuys数据传输，联合了蓝牙模块
 '''
-import json, threading, time, syslog, sys, serial
+import json, threading, time, syslog, sys, serial, random
 from websocket_server import WebsocketServer
 
 msg = {"status": 1, "data": "", "type": "server"}
-bluetooth_port = "/dev/tty.HC-06-SPPDev"
+bluetooth_port = "/dev/tty.LIU_01-DevB"
+music_list = ["bg", "chendu", "hdl", "xiaohuniang", "frisbee", "morning_energy", "rolling_in_the_deep", "one_summers_day"]
 
 def new_client(client, server):
 	msg["data"] = "=> New client, id={:d}".format(client['id'])
@@ -24,6 +25,10 @@ def client_left(client, server):
 	msg["data"] = "=> Client({:d}) disconnected".format(client['id'])
 	server.send_message_to_all(json.dumps(msg))
 	print(msg)
+
+def send_to_all(server, message):
+	print("=> {:s}".format(message))
+	server.send_message_to_all(json.dumps(message))
 
 def message_received(client, server, message):
 	try:
@@ -46,46 +51,82 @@ def send_heatbeat(server):
 	count = 0
 	while True:
 		msg["data"] = data[count % 2]
-		server.send_message_to_all(json.dumps(msg))
+		send_to_all(server, msg)
 		count += 1
 		time.sleep(2)
 
 def bluetooth(server):
-	ard = serial.Serial(bluetooth_port, 9600, timeout=1)
+	bluetooth_serial = serial.Serial(bluetooth_port, 9600, timeout=1)
+	while bluetooth_serial.inWaiting():
+		time.sleep(0.3)
+		print("=> wait Bluetooth available...")
+
 	send = ""
 	time.sleep(1.5)
+	last_one_action = "K"
+
 	while (True):
 		send = "Everything Ok, time={:d}\n".format(int(time.time()))
-		ard.flush()
+		bluetooth_serial.flush()
 		send = str(send)
 
-		try:
-			recv_msg = ard.readline().strip('\n\r')
-			if recv_msg != "":
-				print ("<= From arduino: {:s}".format(recv_msg))
-
-				if recv_msg == "U":
-					msg["data"] = "up"
-				elif recv_msg == "D":
-					msg["data"] = "down"
-				elif recv_msg == "L":
-					msg["data"] = "left"
-				elif recv_msg == "R":
-					msg["data"] = "right"
-				elif recv_msg == "X":
-					msg["data"] = "null"
-
+		count = 0
+		check_times = 5
+		not_send = False
+		count += 1
+		recv_msg = bluetooth_serial.readline().strip('\n\r')
+		if recv_msg != "":
+			print ("<= From arduino: {:s}".format(recv_msg))
+			msg["type"] = "server"
+			
+			if recv_msg == "U":
+				msg["data"] = "up"
 				try:
-					print("=> send message to all clients {:s}".format(recv_msg))
-					server.send_message_to_all(json.dumps(msg))
+					send_to_all(server, msg)
 				except:
-					print "ERROR!"
-				print msg
-			else:
-				pass
-		except:
-			pass
-		print("\n")
+					print("ERROR1_UP")
+			elif recv_msg == "D":
+				msg["data"] = "down"
+				try:
+					send_to_all(server, msg)
+				except:
+					print("ERROR1_DOWN")
+
+			elif recv_msg == "L":
+				msg["data"] = "left"
+				try:
+					send_to_all(server, msg)
+				except:
+					print("ERROR1_LEFT")
+
+			elif recv_msg == "R":
+				msg["data"] = "right"
+				try:
+					send_to_all(server, msg)
+				except:
+					print("ERROR1_RIGHT")
+
+			elif recv_msg == "X":
+				msg["data"] = "null"
+				try:
+					send_to_all(server, msg)
+				except:
+					print("ERROR1_NULL")
+
+			elif (recv_msg == "K"):
+				if str(last_one_action) != str("K"):
+					msg["type"] = "music"
+					msg["data"] = str(music_list[int(random.randint(0, 3))])
+				else:
+					msg["type"] = "server"
+					msg["data"] = "up"
+				try:
+					send_to_all(server, msg)
+				except:
+					print("ERROR1_K")
+			last_one_action = recv_msg
+		else:
+			print("NULL")
 
 def main():
 	PORT = 9001
