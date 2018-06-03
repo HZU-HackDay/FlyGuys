@@ -66,7 +66,7 @@ X = null
 ![](./images/project.jpg) <br>
 
 录像展示：<br>
-<video src="./images/view.mp4" controls="controls"></video><br>
+<video src="https://raw.githubusercontent.com/HZU-HackDay/FlyGuys/master/images/view.mp4" controls="controls"></video><br>
 
 ---
 ## 团队照片
