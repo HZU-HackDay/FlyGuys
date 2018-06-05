@@ -68,11 +68,11 @@ X = null
 
 录像展示：<br>
 
-[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-1.MP4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-1.MP4)
+[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-1.mp4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-1.mp4)
 
-[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-2.MP4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-2.MP4)
+[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-2.mp4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-2.mp4)
 
-[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-3.MP4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-3.MP4)
+[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-3.mp4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-3.mp4)
 
 
 ---
