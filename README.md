@@ -67,11 +67,13 @@ X = null
 ![](./images/project.jpg) <br>
 
 录像展示：<br>
-[![]()](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-1.MP4)
 
-[![]()](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-2.MP4)
+[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-1.MP4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-1.MP4)
 
-[![]()](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-3.MP4)
+[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-2.MP4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-2.MP4)
+
+[https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-3.MP4](https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-3.MP4)
+
 
 ---
 ## 团队照片
