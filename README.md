@@ -63,11 +63,20 @@ X = null
 ## 产品效果
 
 图片展示：<br>
+
 ![](./images/project.jpg) <br>
 
 录像展示：<br>
-<video src="https://raw.githubusercontent.com/HZU-HackDay/FlyGuys/master/images/view.mp4" controls="controls"></video><br>
+<video src="https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-1.MP4" controls="controls"></video><br>
+
+<video src="https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-2.MP4" controls="controls"></video><br>
+
+<video src="https://static.blog.homeway.me/blog/video/Unique-Hackday-FluGuys-3.MP4" controls="controls"></video><br>
 
 ---
 ## 团队照片
 ![Team](./images/team.jpg)
+
+![](https://static.blog.homeway.me/blog/image/Unique-Hackday-FluGuys-1.JPG) <br>
+
+![](https://static.blog.homeway.me/blog/image/Unique-Hackday-FluGuys-2.JPG) <br>
